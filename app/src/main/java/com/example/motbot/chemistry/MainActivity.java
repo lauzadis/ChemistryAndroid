@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button molsToGrams = (Button)findViewById(R.id.molsToGrams);
         Button gramsToMols = (Button) findViewById(R.id.gramsToMols);
+        Button printArray = (Button) findViewById(R.id.printArray);
 
         molsToGrams.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent gramsToMolsSwitcher = new Intent(getApplicationContext(), gramsToMols.class);
                 startActivity(gramsToMolsSwitcher);
+            }
+        });
+
+        printArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent arrayPrinter = new Intent(getApplicationContext(), arrayPrinter.class);
+                startActivity(arrayPrinter);
             }
         });
 
