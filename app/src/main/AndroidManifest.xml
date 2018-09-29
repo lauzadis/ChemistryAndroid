@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".molsToGrams" />
         <activity android:name=".gramsToMols" />
-        <activity android:name=".arrayPrinter"></activity>
+        <activity android:name=".arrayPrinter" />
+        <activity android:name=".dataModify"></activity>
     </application>
 
 </manifest>
