@@ -25,16 +25,15 @@ public class arrayPrinter extends AppCompatActivity {
         setContentView(R.layout.activity_array_printer);
         masses = (String[][]) getIntent().getExtras().get("com.example.motbot.chemistry");
         elementNames = (String[]) getIntent().getExtras().get("names");
-        final AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.actv);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, elementNames);
-        actv.setAdapter(adapter);
-        actv.setThreshold(1);
-        TextView elements = (TextView) findViewById(R.id.elements);
+
+        final TextView elements = (TextView) findViewById(R.id.elements);
         elements.setMovementMethod(new ScrollingMovementMethod());
         elements.setText(printArray(masses));
-
-
-       /* actv.addTextChangedListener(new TextWatcher() {
+        AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.actv);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, elementNames);
+        actv.setAdapter(adapter);
+        actv.setThreshold(1);
+        actv.addTextChangedListener(new TextWatcher() {
 
 
             @Override
@@ -49,10 +48,24 @@ public class arrayPrinter extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.equals("C"))
-                        elements.setText("bool");
+                if(s.toString().equals(""))
+                    elements.setText(printArray(masses));
+
+                else if(nameExists(masses,s.toString())) {
+                    elements.setText("Element - Mass\n\n" + s.toString() + " - " + elementalMass(s.toString()));
+                }
+
+                else{
+                    String result ="Element - Mass\n\n";
+                   for(int i = 0; i < masses.length; i++)
+                   {
+                       if(masses[i][0].toLowerCase().startsWith(s.toString()) || masses[i][0].toUpperCase().startsWith(s.toString()) || masses[i][0].startsWith(s.toString()))
+                           result+= masses[i][0] + " - " + elementalMass(masses[i][0]) + "\n";
+                   }
+                   elements.setText(result);
+                }
             }
-        });*/
+        });
     }
     public double elementalMass(String n) {
         double mass = 0;
@@ -65,7 +78,7 @@ public class arrayPrinter extends AppCompatActivity {
     }
     public String printArray(String[][] list)
     {
-        String result = "Element Name - Atomic Mass\n";
+        String result = "Element - Mass\n\n";
         for(int i = 1; i < 56; i++)
         {
             for(int j = 0; j < list[i].length; j++)
@@ -93,34 +106,14 @@ public class arrayPrinter extends AppCompatActivity {
         return result;
     }
 
-    static int countWords(String str)
+    public boolean nameExists(String[][] list, String s)
     {
-        int state = OUT;
-        int wc = 0;  // word count
-        int i = 0;
-
-        // Scan all characters one by one
-        while (i < str.length())
+        for(int i = 0; i < list.length; i++)
         {
-            // If next character is a separator, set the
-            // state as OUT
-            if (str.charAt(i) == ' ' || str.charAt(i) == '\n'
-                    || str.charAt(i) == '\t')
-                state = OUT;
-
-
-                // If next character is not a word separator
-                // and state is OUT, then set the state as IN
-                // and increment word count
-            else if (state == OUT)
-            {
-                state = IN;
-                ++wc;
-            }
-
-            // Move to next character
-            ++i;
+                if(list[i][0].equals(s))
+                    return true;
         }
-        return wc;
+        return false;
     }
+
 }
