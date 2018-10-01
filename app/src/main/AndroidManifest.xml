@@ -20,7 +20,8 @@
         <activity android:name=".gramsToMols" />
         <activity android:name=".arrayPrinter" />
         <activity android:name=".dataModify" />
-        <activity android:name=".contact"></activity>
+        <activity android:name=".contact" />
+        <activity android:name=".balance"></activity>
     </application>
 
 </manifest>

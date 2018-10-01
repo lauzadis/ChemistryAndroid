@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Button printArray = (Button) findViewById(R.id.printArray);
         Button modifyData = (Button) findViewById(R.id.modifyData);
         Button contact = (Button)findViewById(R.id.contact);
+        Button balance = (Button)findViewById(R.id.balance);
 
 
         molsToGrams.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent contactSwitch = new Intent(getApplicationContext(), contact.class);
                 startActivity(contactSwitch);
+            }
+        });
+
+        balance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent balancerSwitch = new Intent(getApplicationContext(), balance.class);
+                startActivity(balancerSwitch);
             }
         });
 
