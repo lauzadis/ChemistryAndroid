@@ -1,5 +1,6 @@
 package com.example.motbot.chemistry;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,7 @@ public class dataModify extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_modify);
-        String[][]masses = (String[][])getIntent().getExtras().get("data");
+        final String[][]masses = (String[][])getIntent().getExtras().get("data");
         String[]names = (String[])getIntent().getExtras().get("names");
 
 
@@ -24,21 +25,33 @@ public class dataModify extends AppCompatActivity {
         actv.setAdapter(adapter);
         actv.setThreshold(1);
 
-        EditText mass = (EditText)findViewById(R.id.mass);
+        final TextView output = (TextView)findViewById(R.id.output);
         Button storeData = (Button)findViewById(R.id.storeData);
 
 
         storeData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                EditText mass = (EditText)findViewById(R.id.mass);
 
-                TextView result = (TextView)findViewById(R.id.output);
-                result.setText("Success!");
+               /* TextView result = (TextView)findViewById(R.id.output);
+                String name = actv.getText().toString();
+                Double x = Double.valueOf(mass.getText().toString());
+                masses[findIndex(masses,name)][1] = x.toString();
+                MainActivity.masses=masses;*/
+               output.setText("Success!");
+
             }
         });
+    }
 
-
-
-
+    public int findIndex(String[][] list, String s)
+    {
+        for(int i = 0 ; i < list.length; i++)
+        {
+            if(list[i][0].equals(s))
+                return i;
+        }
+        return 0;
     }
 }

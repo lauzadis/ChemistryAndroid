@@ -48,6 +48,7 @@ public class arrayPrinter extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                elements.setText("");
                 if(s.toString().equals(""))
                     elements.setText(printArray(masses));
 
